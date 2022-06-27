@@ -1,18 +1,15 @@
 const express = require("express");
+const { set } = require("mongoose");
 const router = express.Router();
+const {
+  getDoers,
+  setDoer,
+  updateDoer,
+  deleteDoer,
+} = require("../controllers/doerController");
 
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "Get doer" });
-});
 
-router.post("/", (req, res) => {
-  res.status(200).json({ message: "Set doer" });
-});
-router.put("/:id", (req, res) => {
-  res.status(200).json({ message: `Update doer ${req.params.id}` });
-});
-router.delete("/:id", (req, res) => {
-    res.status(200).json({ message: `Delete doer ${req.params.id}` });
-});
+router.route('/').get(getDoers).post(setDoer);
+router.route('/:id').delete(deleteDoer).put(updateDoer);
 
 module.exports = router;
