@@ -3,7 +3,7 @@
 //@access Private
 
 const getDoers = (req, res) => {
-  res.status(200).json({ message: "Get doer" });
+  res.status(200).json({ message: "Get doers" });
 };
 
 
@@ -31,7 +31,7 @@ const updateDoer = (req, res) => {
 //@access Private
 
 const deleteDoer = (req, res) => {
-    res.status(200).json({ message: "Delete doer" });
+    res.status(200).json({ message: `Delete doer ${req.params.id}` });
   }
 
 module.exports = {
