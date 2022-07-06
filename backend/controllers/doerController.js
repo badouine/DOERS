@@ -19,8 +19,10 @@ const setDoer = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please add a text field");
   }
-
-  res.status(200).json({ message: "Set doer" });
+  const doer = await Doer.create({
+    text: req.body.text
+  })
+  res.status(200).json(doer);
 });
 
 // @desc Update doers
@@ -28,7 +30,15 @@ const setDoer = asyncHandler(async (req, res) => {
 //@access Private
 
 const updateDoer = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update doer ${req.params.id}` });
+  const doer = await Doer.findById(req.params.id)
+  if(!doer){ 
+    res.status(400)
+    throw new Error('Doer not found')
+  }
+  const updatedDoer = await Doer.findByIdAndUpdate(req.params.id, req.body,{
+    new: true,
+  })
+  res.status(200).json(updatedDoer);
 });
 
 // @desc Delete doers
@@ -36,7 +46,13 @@ const updateDoer = asyncHandler(async (req, res) => {
 //@access Private
 
 const deleteDoer = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete doer ${req.params.id}` });
+  const doer = await Doer.findById(req.params.id)
+  if(!doer){ 
+    res.status(400)
+    throw new Error('Doer not found')
+  }
+  await doer.remove();
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
