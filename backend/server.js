@@ -7,6 +7,7 @@ const colors = require("colors");
 
 const app = express();
 connectDB();
+app.use(express.json());
 app.use("/api/doers", require("./routes/doerRoutes"));
 app.use(errorHandler);
 
