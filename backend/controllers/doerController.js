@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Doer = require("../models/doerModel");
 
-// @desc Get doers
+//@desc Get doers
 //@route GET /api/goals -
 //@access Private
 
